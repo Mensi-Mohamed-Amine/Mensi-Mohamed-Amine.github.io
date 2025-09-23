@@ -1,11 +1,11 @@
 ---
 
 layout: post
-title: "How We Built Something Awesome with Chirpy"
+title: "Forensics"
 date: 2025-09-22 13:00:00 +0000
-categories: SecuriNetsCTF2015
-tags: \[jekyll, chirpy, static-site, tutorial]
-summary: "A short walkthrough showing how to create a beautiful Chirpy post with images, code blocks, and callouts."
+categories: [ctf-writeups, picoCTF - picoGym Challenges]
+tags: [jekyll, chirpy, static-site, tutorial]
+summary: "my ctf writeups."
 author: Amine
 toc: true
 math: false
