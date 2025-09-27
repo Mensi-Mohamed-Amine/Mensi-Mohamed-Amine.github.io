@@ -234,3 +234,161 @@ io.interactive()
 ### exploit output
 
 ![Alt Text](/assets/posts/pico-ctf/cryptography/hashcrack/12.png)
+
+### flag
+```
+picoCTF{UseStr0nG_h@shEs_&PaSswDs!_93e052d7}
+```
+
+## EVEN RSA CAN BE BROKEN???
+challenge files @ [EVEN RSA CAN BE BROKEN???](https://github.com/Mensi-Mohamed-Amine/ctf-writeups/tree/main/picoCTF%20-%20picoGym%20Challenges/even-rsa-can-be-broken)
+
+## description 
+
+![Alt Text](/assets/posts/pico-ctf/cryptography/even-rsa-can-be-broken/1.png)
+
+## solution 
+We are given the source code for the challenge which is an implementation of RSA algorithm .
+```python
+from sys import exit
+from Crypto.Util.number import bytes_to_long, inverse
+from setup import get_primes
+
+e = 65537
+
+def gen_key(k):
+    """
+    Generates RSA key with k bits
+    """
+    p,q = get_primes(k//2)
+    N = p*q
+    d = inverse(e, (p-1)*(q-1))
+
+    return ((N,e), d)
+
+def encrypt(pubkey, m):
+    N,e = pubkey
+    return pow(bytes_to_long(m.encode('utf-8')), e, N)
+
+def main(flag):
+    pubkey, _privkey = gen_key(1024)
+    encrypted = encrypt(pubkey, flag) 
+    return (pubkey[0], encrypted)
+
+if __name__ == "__main__":
+    flag = open('flag.txt', 'r').read()
+    flag = flag.strip()
+    N, cypher  = main(flag)
+    print("N:", N)
+    print("e:", e)
+    print("cyphertext:", cypher)
+    exit()
+
+```
+
+The program encrypt the flag using RSA algorithm, so to solve this challenge we should use `sympy` library to factorize `N` and get `p` and `q` prime numbers and then calculate `phi` and finally calculate the private exponent `d` to decrypt our ciphertext.
+
+### exploit
+```python
+
+# sympy_rsa_dec#!/usr/bin/env python3
+# sympy_rsa_decrypt.py
+from sympy import factorint, mod_inverse
+from pwn import *
+HOST = 'verbal-sleep.picoctf.net'
+PORT = 59419
+
+io = remote(HOST, PORT)
+
+# Given values
+io.recvuntil(b'N: ')
+N = int(io.recvline().strip().decode())
+log.success(f"N: {N}")
+io.recvuntil(b'e: ')
+e = int(io.recvline().strip().decode())
+log.success(f"e: {e}")
+io.recvuntil(b'cyphertext: ')
+c = int(io.recvline().strip().decode())
+log.success(f"c: {c}")
+
+# Factor N (SymPy will return a dict {prime: exponent})
+factors = factorint(N)
+print("factors:", factors)
+
+# Convert factor dict to a list of primes repeated by exponent
+primes = []
+for p, exp in factors.items():
+    primes.extend([p] * exp)
+
+if len(primes) != 2:
+    raise SystemExit("N is not a product of exactly two primes (or SymPy didn't find it that way).")
+
+p, q = primes
+print("p =", p)
+print("q =", q)
+
+# Compute private exponent
+phi = (p - 1) * (q - 1)
+d = mod_inverse(e, phi)
+print("d =", d)
+
+# Decrypt
+m = pow(c, d, N)
+# Convert integer to bytes and decode
+mb = m.to_bytes((m.bit_length() + 7) // 8, 'big')
+try:
+    plaintext = mb.decode()
+except UnicodeDecodeError:
+    plaintext = mb
+print("plaintext:", plaintext)
+```
+
+### exploit output
+
+![Alt Text](/assets/posts/pico-ctf/cryptography/even-rsa-can-be-broken/2.png)
+
+### flag
+
+```
+picoCTF{tw0_1$_pr!m3df98b648}
+```
+
+## interencdec
+
+challenge files @ [interencdec](https://github.com/Mensi-Mohamed-Amine/ctf-writeups/tree/main/picoCTF%20-%20picoGym%20Challenges/interendec)
+
+### description 
+![Alt Text](/assets/posts/pico-ctf/cryptography/interencdec/1.png)
+
+### solution
+In this challenge we have double base64 string, so to decrypt it i chained some bash commands to do the job, and we got what look like a ROT-X string.
+
+![Alt Text](/assets/posts/pico-ctf/cryptography/interencdec/2.png)
+
+Knowing the flag format `picoCTF{.*}` i mapped `p` to `w` and i figured out that the cipher is ROT19 (forward) or ROT-7 (backward), so i used the `tr` command to decrypt the cihpertext and we got our flag :)) .
+
+![Alt Text](/assets/posts/pico-ctf/cryptography/interencdec/3.png)
+
+### full command 
+
+```bash
+cat enc_flag | base64 -d | sed "s/b'//g" | sed "s/'//g" | base64 -d | tr 'A-Za-z' 'T-ZA-St-za-s'
+```
+
+### flag
+
+```
+picoCTF{caesar_d3cr9pt3d_ea60e00b}
+```
+
+
+
+
+## b00tl3gRSA2
+
+### description
+
+![Alt Text](/assets/posts/pico-ctf/cryptography/b00tl3gRSA2/1.png)
+
+## solution
+

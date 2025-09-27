@@ -98,7 +98,7 @@ theme_mode: dark #[light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: https://scontent.ftun1-2.fna.fbcdn.net/v/t39.30808-6/494711901_714602287898301_3584328045103252905_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=omdbTkG4L8UQ7kNvwFC0iCS&_nc_oc=Adkv7dou5mpr0qwm92OvZG-OYdG_g8XSHWbTgax4zymuYIpxnIYk0MDKburw1T62H_4&_nc_zt=23&_nc_ht=scontent.ftun1-2.fna&_nc_gid=F0ZjN6J80sh2G87g_KBeNw&oh=00_AfaQyl1TTlpEYheWFg-bCSYIe6rvUfid-OsXLcpbB_42gg&oe=68D693BC
+avatar: https://scontent.ftun1-2.fna.fbcdn.net/v/t39.30808-6/494711901_714602287898301_3584328045103252905_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=7FcR_O_wRvYQ7kNvwGGyQgr&_nc_oc=Adls-ThSvuqsGBu4NMeAtK22N6YzTyNaW2SzanUz_Z_oV__5baQIgkpgMuGruFq-II8&_nc_zt=23&_nc_ht=scontent.ftun1-2.fna&_nc_gid=X0ncGqSv0aVLnmAEm9iN6A&oh=00_AfYy1jwfw-aFCpmrXaEFXiySLrUWw0wPscDMgIsN_0D8dA&oe=68DD637C
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
