@@ -98,7 +98,7 @@ theme_mode: dark #[light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: assets/img/ppp.jpeg # string, local or CORS resources
+avatar: assets/img/p.jpeg # string, local or CORS resources
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
