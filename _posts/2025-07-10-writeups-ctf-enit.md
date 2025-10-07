@@ -1,9 +1,9 @@
 ---
 
 layout: post
-title: "crackmes.one"
+title: "Cat The Flag v2"
 date: 2025-10-06 13:00:00 +0000
-categories: [Crackmes.one, Crackmes.one]
+categories: [ctf-writeups, Cat The Flag v2]
 tags: 
 summary: "my writeups for picoCTF - picoGym Challenges."
 author: Mensi Mohamed Amine
