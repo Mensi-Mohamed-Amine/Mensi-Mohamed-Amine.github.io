@@ -5,7 +5,7 @@ title: "Cat The Flag v2"
 date: 2025-10-06 13:00:00 +0000
 categories: [ctf-writeups, Cat The Flag v2]
 tags: 
-image: /assets/posts/ctf-enit-2025/profile.jpg   
+image: /assets/posts/ctf-enit-2025/posterv2-1.png
 summary: "my writeups for picoCTF - picoGym Challenges."
 author: Mensi Mohamed Amine
 toc: true
